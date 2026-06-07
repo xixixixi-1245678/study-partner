@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知学助手 - 智能学习辅助平台</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <!-- 全局背景装饰 -->
+    <div class="page-decoration deco-top-right">📗</div>
+    <div class="page-decoration deco-bottom-left">🍀</div>
+    <div class="page-decoration deco-middle-right">📘</div>
+
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="logo-area">
+                <span class="logo-icon">🎓</span>
+                <span class="logo-text">知学助手</span>
+            </div>
+            <div class="topbar-right">
+                <div class="user-badge">学习用户</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="home-main">
+        <!-- Hero 区域 -->
+        <section class="hero-section">
+            <div class="hero-bg"></div>
+            <div class="hero-deco hero-deco-1">📗</div>
+            <div class="hero-deco hero-deco-2">🍀</div>
+            <div class="hero-deco hero-deco-3">📘</div>
+            <div class="hero-deco hero-deco-4">🌿</div>
+            <div class="hero-deco hero-deco-5">✨</div>
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">知学助手</span><br>你的智能学习伙伴
+                </h1>
+                <p class="hero-desc">30+学科覆盖 · AI智能评阅 · 思维导图 · AI错题辅导 · 全真面试 — 一站式学习辅助平台 v3.2</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-num">3</span>
+                        <span class="stat-label">核心模块</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">30+</span>
+                        <span class="stat-label">学科覆盖</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">AI</span>
+                        <span class="stat-label">全平台评阅</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 模块卡片 -->
+        <section class="modules-section">
+            <div class="section-divider">🌱 核心功能 🌱</div>
+            <h2 class="section-title">探索学习模块</h2>
+            <p class="section-subtitle">选择你需要的功能，开启高效学习之旅</p>
+
+            <div class="module-cards">
+                <!-- AI论文工坊 -->
+                <div class="module-card card-paper" onclick="window.location.href='/pages/paper.html'">
+                    <div class="card-glow"></div>
+                    <div class="card-decoration card-deco-tr">📝</div>
+                    <div class="card-icon-wrap">
+                        <span class="card-icon">📄</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>AI论文工坊</h3>
+                        <p>全专业通用论文辅助，覆盖选题、开题、文献综述、正文写作、降重润色、格式排版全流程</p>
+                        <div class="card-features">
+                            <span class="feature-tag">智能选题</span>
+                            <span class="feature-tag">开题报告</span>
+                            <span class="feature-tag">全文润色</span>
+                            <span class="feature-tag">财经实证</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="enter-btn">进入模块 →</span>
+                    </div>
+                </div>
+
+                <!-- 学习规划 + AI辅导 -->
+                <div class="module-card card-plan" onclick="window.location.href='/pages/plan.html'">
+                    <div class="card-glow"></div>
+                    <div class="card-decoration card-deco-tr">📘</div>
+                    <div class="card-icon-wrap">
+                        <span class="card-icon">🎯</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>个性化学习规划</h3>
+                        <p>超详细思维导图知识体系，AI学习规划辅导，分层试卷评阅，AI错题辅导，个性化备考方案</p>
+                        <div class="card-features">
+                            <span class="feature-tag">超详细思维导图</span>
+                            <span class="feature-tag">AI学习规划</span>
+                            <span class="feature-tag">AI错题辅导</span>
+                            <span class="feature-tag">分层试卷</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="enter-btn">进入模块 →</span>
+                    </div>
+                </div>
+
+                <!-- 面试准备 -->
+                <div class="module-card card-interview" onclick="window.location.href='/pages/interview.html'">
+                    <div class="card-glow"></div>
+                    <div class="card-decoration card-deco-bl">🌿</div>
+                    <div class="card-icon-wrap">
+                        <span class="card-icon">💼</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>AI 全真模拟面试</h3>
+                        <p>LLM智能体驱动，深度追问+压力面试+AI定制备战材料+6大面试场景</p>
+                        <div class="card-features">
+                            <span class="feature-tag">LLM智能追问</span>
+                            <span class="feature-tag">压力面试</span>
+                            <span class="feature-tag">备战材料</span>
+                            <span class="feature-tag">多场景覆盖</span>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="enter-btn">进入模块 →</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <footer class="home-footer">
+            <p>🌿 知学助手 — 让学习更高效、更有条理</p>
+        </footer>
+    </main>
+</body>
+</html>

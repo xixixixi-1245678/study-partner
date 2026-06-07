@@ -1,0 +1,1210 @@
+/* ========== AI模拟面试模块样式 ========== */
+
+/* 场景选择卡片 */
+.interview-scenes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.scene-card {
+    padding: 16px;
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--border);
+    background: #fff;
+    cursor: pointer;
+    text-align: center;
+    transition: all var(--transition);
+}
+
+.scene-card:hover {
+    border-color: var(--primary);
+    background: var(--primary-bg);
+}
+
+.scene-card.active {
+    border-color: var(--primary);
+    background: #d1fae5;
+    box-shadow: 0 0 0 3px rgba(5,150,105,0.1);
+}
+
+.scene-icon { font-size: 28px; margin-bottom: 6px; }
+.scene-card h4 { font-size: 14px; margin-bottom: 2px; }
+.scene-card p { font-size: 12px; color: var(--text-light); }
+
+.scene-panel { display: none; }
+.scene-panel.active { display: block; }
+
+/* 简历上传 */
+.upload-resume-area {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 14px;
+    transition: all var(--transition);
+}
+
+.upload-resume-area:hover {
+    border-color: var(--primary);
+    background: var(--primary-bg);
+}
+
+/* 面试类型卡片 */
+.interview-types {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.itype-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 20px 12px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: #fff;
+    cursor: pointer;
+    transition: all var(--transition);
+    font-family: inherit;
+    text-align: center;
+}
+
+.itype-card:hover {
+    border-color: var(--primary);
+    background: var(--primary-bg);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.itype-icon { font-size: 28px; }
+.itype-name { font-size: 14px; font-weight: 600; }
+.itype-desc { font-size: 11px; color: var(--text-light); }
+
+/* 面试对话 */
+.interview-chat-card { border: 2px solid #d1fae5; }
+
+.question-counter {
+    font-size: 13px;
+    color: var(--primary);
+    font-weight: 500;
+    margin-left: auto;
+    background: var(--primary-bg);
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+.interview-actions {
+    display: flex;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-light);
+    flex-wrap: wrap;
+}
+
+/* 评分报告 */
+.score-card { border: 2px solid var(--primary-bg); }
+
+.score-dimensions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 16px 0;
+}
+
+.score-dim {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.score-dim .dim-name {
+    width: 100px;
+    font-size: 14px;
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+.score-dim .dim-bar-wrap {
+    flex: 1;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.score-dim .dim-bar {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.8s ease;
+}
+
+.score-dim .dim-score {
+    width: 40px;
+    text-align: right;
+    font-weight: 700;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.score-summary {
+    background: #ecfdf5;
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin-top: 16px;
+}
+
+.score-summary h4 { margin-bottom: 8px; }
+
+/* 考证复试 */
+.exam-interview-types {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* 联动功能 */
+.linked-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.linked-card {
+    padding: 20px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition);
+    background: #fff;
+}
+
+.linked-card:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.linked-card h4 { font-size: 15px; margin-bottom: 6px; }
+.linked-card p { font-size: 13px; color: var(--text-secondary); }
+
+/* 拓展面试 */
+.extend-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.extend-card {
+    padding: 24px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    text-align: center;
+    transition: all var(--transition);
+    cursor: pointer;
+    background: #fff;
+}
+
+.extend-card:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+.extend-icon { font-size: 40px; margin-bottom: 12px; }
+.extend-card h4 { font-size: 16px; margin-bottom: 8px; }
+.extend-card p { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
+
+/* 语音按钮 */
+#btnVoice {
+    position: relative;
+}
+
+#btnVoice.recording {
+    animation: pulse 1s infinite;
+    background: var(--danger);
+    color: #fff;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); }
+    50% { box-shadow: 0 0 0 10px rgba(239,68,68,0); }
+}
+
+/* 打字机效果指示器 */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 16px;
+    min-width: 60px;
+}
+
+.typing-indicator span {
+    width: 8px;
+    height: 8px;
+    background: var(--text-light);
+    border-radius: 50%;
+    animation: typingBounce 1.4s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(1) { animation-delay: 0s; }
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-8px); opacity: 1; }
+}
+
+/* 追问消息高亮 */
+.msg.follow-up .msg-content {
+    border-left: 3px solid var(--warning);
+    background: #fffbeb;
+}
+
+/* 场景卡片hover增强 */
+.scene-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.scene-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--primary);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.scene-card:hover::after,
+.scene-card.active::after {
+    transform: scaleX(1);
+}
+
+/* 面试类型卡片增强 */
+.itype-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.itype-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(5,150,105,0.05), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.itype-card:hover::before {
+    opacity: 1;
+}
+
+/* 消息入场动画 */
+.msg {
+    animation: msgSlideIn 0.3s ease-out;
+}
+
+@keyframes msgSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 评分报告动画 */
+.score-dim .dim-bar {
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 面试进行中状态指示 */
+.interview-chat-card .card-header {
+    position: relative;
+}
+
+.interview-chat-card .card-header::after {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--success);
+    border-radius: 50%;
+    margin-left: 8px;
+    animation: statusPulse 2s infinite;
+}
+
+@keyframes statusPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* 回答分析反馈标签 */
+.answer-feedback-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+.answer-feedback-tag.excellent {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.answer-feedback-tag.good {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.answer-feedback-tag.medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.answer-feedback-tag.low {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* 场景面板切换动画 */
+.scene-panel.active {
+    animation: panelFadeIn 0.4s ease-out;
+}
+
+@keyframes panelFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========== AI备战材料样式 ========== */
+.prep-material-card {
+    border: 2px solid #c7d2fe;
+    background: linear-gradient(135deg, #faf5ff, #eef2ff);
+}
+
+.prep-material-card .card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.agent-thinking {
+    padding: 16px;
+    background: #eef2ff;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #4338ca;
+    animation: pulse 1.5s infinite;
+}
+
+.prep-material-package {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.prep-section {
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px;
+    border: 1px solid var(--border-light);
+}
+
+.prep-section h4 {
+    font-size: 16px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #ede9fe;
+    color: #5b21b6;
+}
+
+.prep-outline ul,
+.prep-knowledge ul,
+.prep-frontier ul {
+    padding-left: 18px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 2;
+}
+
+.prep-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.prep-q-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    background: #faf5ff;
+    border-radius: 8px;
+    border-left: 3px solid #8b5cf6;
+}
+
+.prep-q-num {
+    width: 32px;
+    height: 32px;
+    background: #8b5cf6;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+.prep-q-item strong {
+    display: block;
+    font-size: 14px;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.prep-q-item p {
+    font-size: 12px;
+    color: var(--text-light);
+    margin: 0;
+}
+
+/* 答题框架提示 */
+.prep-answer-hint {
+    margin-top: 6px !important;
+    padding: 6px 10px;
+    background: #eff6ff;
+    border-radius: 6px;
+    font-size: 12px !important;
+    color: #1e40af !important;
+    line-height: 1.6;
+}
+
+/* 面试准备Checklist */
+.prep-checklist {
+    background: #f0fdf4;
+    border-radius: 8px;
+    padding: 14px;
+    border: 1px solid #bbf7d0;
+}
+
+.prep-self-intro {
+    background: #fefce8;
+    border-radius: 8px;
+    padding: 14px;
+}
+
+.prep-intro-template {
+    background: #fff;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 14px;
+    line-height: 2;
+    color: var(--text-primary);
+    border: 1px solid #fde68a;
+}
+
+.prep-frontier ul li {
+    margin-bottom: 4px;
+}
+
+/* ========== LLM 追问标签 ========== */
+.follow-up-tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    background: #dbeafe;
+    color: #1e40af;
+    margin-right: 6px;
+}
+
+.pressure-tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    background: #fee2e2;
+    color: #991b1b;
+    margin-right: 6px;
+    animation: pressurePulse 1s infinite;
+}
+
+@keyframes pressurePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* ========== 智能教学标签 ========== */
+.teaching-tag {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    color: #065f46;
+    margin-right: 6px;
+}
+
+/* Badge */
+.badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.badge-new {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+/* 智能体状态指示 */
+.agent-status-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: #f8fafc;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.agent-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+    animation: statusPulse 2s infinite;
+}
+
+/* ========== AI智能体配置面板样式 ========== */
+.agent-config-card {
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #f8fafc 100%);
+    border: 2px solid #d1fae5;
+    margin-bottom: 20px;
+}
+
+.agent-config-card .card-header {
+    border-bottom: 1px solid #d1fae5;
+}
+
+.agent-config-body {
+    padding: 16px 0;
+}
+
+.agent-info-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 16px;
+    padding: 0 4px;
+}
+
+.agent-status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #065f46;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #10b981;
+    display: inline-block;
+}
+
+.status-dot.active {
+    animation: statusPulse 2s infinite;
+}
+
+.status-dot.pulse {
+    animation: agentPulseFast 0.8s ease-in-out 3;
+}
+
+@keyframes agentPulseFast {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(16,185,129,0); }
+}
+
+.agent-personality-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.agent-personality-selector label {
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.agent-personality-selector .select {
+    min-width: 220px;
+    font-size: 13px;
+}
+
+.agent-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    padding: 0 4px;
+}
+
+.agent-feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 8px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.agent-feature-item:hover {
+    border-color: #10b981;
+    background: #f0fdf4;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(16,185,129,0.1);
+}
+
+.af-icon {
+    font-size: 22px;
+}
+
+.af-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.af-desc {
+    font-size: 10px;
+    color: var(--text-light);
+}
+
+/* ========== Coze AI 面试智能体面板 ========== */
+.linked-ai-header {
+    background: linear-gradient(135deg, #2563eb, #3b82f6) !important;
+    color: #fff !important;
+    position: relative;
+}
+
+.linked-ai-header .card-icon {
+    color: #fff;
+}
+
+.linked-ai-header h3 {
+    color: #fff;
+    flex: 1;
+}
+
+.badge-ai {
+    font-size: 10px;
+    background: rgba(255,255,255,0.25);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.linked-ai-toggle {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+    font-weight: 700;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.linked-ai-toggle:hover {
+    opacity: 1;
+}
+
+.linked-ai-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    max-height: 450px;
+}
+
+/* 欢迎面板 */
+.linked-ai-welcome {
+    text-align: center;
+    padding: 20px 16px;
+    flex-shrink: 0;
+}
+
+.linked-ai-welcome-icon {
+    font-size: 44px;
+    margin-bottom: 8px;
+}
+
+.linked-ai-welcome p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.linked-ai-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+}
+
+.linked-ai-features span {
+    font-size: 11px;
+    padding: 4px 10px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+/* 消息区域 */
+.linked-ai-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 0;
+}
+
+.linked-ai-msg {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    animation: fadeIn 0.3s ease;
+}
+
+.linked-ai-msg.user {
+    flex-direction: row-reverse;
+}
+
+.linked-ai-msg-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    background: #f1f5f9;
+}
+
+.linked-ai-msg.user .linked-ai-msg-avatar {
+    background: #dbeafe;
+}
+
+.linked-ai-msg.assistant .linked-ai-msg-avatar {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+}
+
+.linked-ai-msg-content {
+    max-width: 75%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.7;
+    word-break: break-word;
+}
+
+.linked-ai-msg.user .linked-ai-msg-content {
+    background: #dbeafe;
+    color: #1e40af;
+    border-bottom-right-radius: 4px;
+}
+
+.linked-ai-msg.assistant .linked-ai-msg-content {
+    background: #f8fafc;
+    color: var(--text-primary);
+    border-bottom-left-radius: 4px;
+    border: 1px solid #e2e8f0;
+}
+
+.linked-ai-msg-content img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 6px 0;
+}
+
+.linked-ai-msg-content a {
+    color: #2563eb;
+    text-decoration: underline;
+    word-break: break-all;
+}
+
+.linked-ai-msg-content pre {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 10px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 6px 0;
+}
+
+.linked-ai-msg-content code {
+    background: #f1f5f9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: 'Consolas', 'Courier New', monospace;
+}
+
+.linked-ai-msg-content pre code {
+    background: none;
+    padding: 0;
+}
+
+/* 思考动画 */
+.linked-ai-thinking {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.linked-ai-thinking .thinking-dot {
+    animation: thinkingBounce 1.4s infinite;
+    font-weight: bold;
+}
+
+.linked-ai-thinking .thinking-dot:nth-child(2) { animation-delay: 0.2s; }
+.linked-ai-thinking .thinking-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes thinkingBounce {
+    0%, 80%, 100% { opacity: 0; transform: translateY(0); }
+    40% { opacity: 1; transform: translateY(-4px); }
+}
+
+/* 快捷操作按钮 */
+.linked-ai-quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px 14px;
+    border-top: 1px solid #f1f5f9;
+    flex-shrink: 0;
+}
+
+.linked-ai-quick-btn {
+    padding: 5px 12px;
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: inherit;
+    color: var(--text-primary);
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.linked-ai-quick-btn:hover {
+    border-color: #2563eb;
+    color: #2563eb;
+    background: #dbeafe;
+}
+
+/* 输入行 */
+.linked-ai-input-row {
+    display: flex;
+    gap: 8px;
+    padding: 10px 14px;
+    border-top: 1px solid #e2e8f0;
+    flex-shrink: 0;
+}
+
+.linked-ai-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 20px;
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.linked-ai-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37,99,235,0.1);
+}
+
+.linked-ai-send-btn {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: none;
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.linked-ai-send-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+    box-shadow: 0 2px 8px rgba(37,99,235,0.3);
+}
+
+.linked-ai-send-btn:active {
+    transform: scale(0.96);
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .interview-scenes { grid-template-columns: repeat(2, 1fr); }
+    .interview-types { grid-template-columns: repeat(2, 1fr); }
+    .linked-features { grid-template-columns: 1fr; }
+    .extend-features { grid-template-columns: 1fr; }
+    .score-dim { flex-wrap: wrap; }
+    .score-dim .dim-name { width: 80px; }
+    .prep-q-item { flex-direction: column; }
+}
+
+/* ========== 智能体面板通用样式 ========== */
+.agent-panel {
+    border: 2px solid #c7d2fe !important;
+    margin-bottom: 20px;
+    animation: panelFadeIn 0.4s ease-out;
+}
+
+/* ========== 智能题库面板 ========== */
+.bank-panel {
+    padding: 4px;
+}
+
+.bank-panel-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: #f0fdf4;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+.bank-panel-icon {
+    font-size: 28px;
+}
+
+.bank-panel-header strong {
+    font-size: 15px;
+    color: #065f46;
+}
+
+.bank-panel-header small {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.bank-question-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.bank-q-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: #fff;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.bank-q-item:hover {
+    border-color: var(--primary);
+    background: var(--primary-bg);
+    transform: translateX(4px);
+}
+
+.bank-q-num {
+    width: 28px;
+    height: 28px;
+    background: #8b5cf6;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.bank-q-text {
+    flex: 1;
+    font-size: 13px;
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+
+.bank-q-action {
+    font-size: 12px;
+    color: var(--primary);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.bank-panel-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0 0;
+    margin-top: 8px;
+    border-top: 1px solid var(--border-light);
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+/* ========== 素材/规划面板结果样式 ========== */
+#materialAgentResult .prep-section,
+#planAgentResult .prep-section,
+#bilingualAgentResult .prep-section,
+#techBilingualAgentResult .prep-section {
+    max-height: 600px;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+#materialAgentResult h3,
+#planAgentResult h3,
+#bilingualAgentResult h3,
+#techBilingualAgentResult h3 {
+    color: #5b21b6;
+    margin: 16px 0 8px;
+    font-size: 16px;
+    border-bottom: 2px solid #ede9fe;
+    padding-bottom: 6px;
+}
+
+#materialAgentResult table,
+#planAgentResult table,
+#bilingualAgentResult table,
+#techBilingualAgentResult table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 10px 0;
+}
+
+#materialAgentResult td,
+#materialAgentResult th,
+#planAgentResult td,
+#planAgentResult th,
+#bilingualAgentResult td,
+#bilingualAgentResult th,
+#techBilingualAgentResult td,
+#techBilingualAgentResult th {
+    padding: 8px 10px;
+    border: 1px solid #e2e8f0;
+    text-align: left;
+}
+
+#materialAgentResult th,
+#planAgentResult th,
+#bilingualAgentResult th,
+#techBilingualAgentResult th {
+    background: #f8fafc;
+    font-weight: 600;
+}
+
+#materialAgentResult blockquote,
+#planAgentResult blockquote,
+#bilingualAgentResult blockquote,
+#techBilingualAgentResult blockquote {
+    border-left: 3px solid #8b5cf6;
+    padding: 8px 16px;
+    margin: 10px 0;
+    background: #faf5ff;
+    border-radius: 0 6px 6px 0;
+    color: #5b21b6;
+    font-style: italic;
+}
+
+/* ========== 互联功能卡片可点击增强 ========== */
+.linked-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.linked-card::after {
+    content: '点击使用 →';
+    position: absolute;
+    bottom: 12px;
+    right: 16px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.linked-card:hover::after {
+    opacity: 1;
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>错题归集提升 - 知学助手</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/wrongbook.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="logo-area" onclick="window.location.href='/index.html'">
+                <span class="logo-icon">🎓</span>
+                <span class="logo-text">知学助手</span>
+            </div>
+            <div class="topbar-right">
+                <button class="back-btn" onclick="window.location.href='/index.html'">← 返回首页</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="subpage-container">
+        <div class="subpage-header">
+            <h1>📝 错题归集提升</h1>
+            <p>拍照上传 · AI逐题拆解 · 变式巩固练习 · 云端永久归档</p>
+        </div>
+
+        <div class="subpage-body">
+            <!-- 功能区 -->
+            <div class="wrongbook-tabs">
+                <button class="wb-tab active" data-tab="upload">📸 上传错题</button>
+                <button class="wb-tab" data-tab="list">📋 错题本</button>
+                <button class="wb-tab" data-tab="review">🔍 薄弱考点</button>
+            </div>
+
+            <!-- Tab1: 上传错题 -->
+            <div class="wb-panel active" id="panel-upload">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📸</span>
+                        <h3>上传错题</h3>
+                    </div>
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-placeholder">
+                            <div class="upload-icon">📷</div>
+                            <p><strong>点击上传错题截图</strong></p>
+                            <p style="color:var(--text-light);font-size:13px;">支持图片、文字粘贴</p>
+                        </div>
+                        <input type="file" id="fileInput" accept="image/*" style="display:none">
+                    </div>
+                    <div style="margin-top:16px">
+                        <label style="font-size:14px;font-weight:500">或直接粘贴错题内容：</label>
+                        <textarea class="textarea" id="wrongQuestionText" placeholder="粘贴错题题目内容..." style="margin-top:8px;min-height:120px"></textarea>
+                        <div class="form-group" style="margin-top:12px;">
+                            <label>错误类型</label>
+                            <select class="select" id="wqErrorType">
+                                <option value="concept">概念不清</option>
+                                <option value="calculation">计算失误</option>
+                                <option value="understanding">理解偏差</option>
+                                <option value="careless">审题粗心</option>
+                            </select>
+                        </div>
+                        <p style="font-size:12px;color:var(--text-light);margin-top:6px;">💡 学科将由AI智能识别，无需手动选择</p>
+                        <button class="btn btn-primary btn-lg" onclick="analyzeWrongQuestion()" style="margin-top:12px">
+                            🔍 AI分析错题
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 分析结果 -->
+                <div class="card analysis-card" id="analysisCard" style="display:none;">
+                    <div class="card-header">
+                        <span class="card-icon">🔬</span>
+                        <h3>错题分析报告</h3>
+                    </div>
+                    <div id="analysisContent"></div>
+                </div>
+
+                <!-- 变式练习题 -->
+                <div class="card variant-card" id="variantCard" style="display:none;">
+                    <div class="card-header">
+                        <span class="card-icon">🎯</span>
+                        <h3>变式巩固练习（同考点3题）</h3>
+                    </div>
+                    <div id="variantContent"></div>
+                    <div id="variantFeedback"></div>
+                </div>
+            </div>
+
+            <!-- Tab2: 错题本 -->
+            <div class="wb-panel" id="panel-list">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📋</span>
+                        <h3>我的错题本</h3>
+                        <span style="font-size:13px;color:var(--text-light);margin-left:auto" id="totalWrongCount">共 0 题</span>
+                    </div>
+                    <div id="wrongListContent">
+                        <div style="text-align:center;padding:40px;color:var(--text-light)">
+                            <p style="font-size:48px;margin-bottom:12px">📭</p>
+                            <p>还没有错题记录，快去上传吧！</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab3: 薄弱考点 -->
+            <div class="wb-panel" id="panel-review">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔍</span>
+                        <h3>薄弱考点诊断</h3>
+                        <span style="font-size:13px;color:var(--text-light);margin-left:auto">基于错题数据分析</span>
+                    </div>
+                    <div id="weakPointsContent">
+                        <div style="text-align:center;padding:40px;color:var(--text-light)">
+                            <p style="font-size:48px;margin-bottom:12px">📊</p>
+                            <p>积累错题后，系统将自动分析薄弱考点</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/wrongbook.js"></script>
+</body>
+</html>

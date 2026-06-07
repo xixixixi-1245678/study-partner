@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI论文工坊 - 知学助手</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/paper.css">
+</head>
+<body>
+    <!-- 全局背景装饰 -->
+    <div class="page-decoration deco-top-right">📄</div>
+    <div class="page-decoration deco-bottom-left">✍️</div>
+    <div class="page-decoration deco-middle-right">📝</div>
+
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="logo-area" onclick="window.location.href='/index.html'">
+                <span class="logo-icon">🎓</span>
+                <span class="logo-text">知学助手</span>
+            </div>
+            <div class="topbar-right">
+                <button class="back-btn" onclick="window.location.href='/index.html'">← 返回首页</button>
+                <div class="user-badge">学习用户</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="subpage-container">
+        <!-- 页面头部 -->
+        <div class="subpage-header">
+            <h1>📄 AI论文工坊</h1>
+            <p>全专业通用论文辅助，覆盖选题、开题、文献综述、正文写作、逻辑优化、降重润色、格式排版全流程，深耕财经经管论文专项能力</p>
+        </div>
+
+        <div class="paper-layout">
+            <!-- 左侧：功能面板 -->
+            <div class="paper-sidebar">
+                <!-- 功能标签 -->
+                <div class="paper-tags">
+                    <span class="paper-tag tag-smart">🧠 智能选题</span>
+                    <span class="paper-tag tag-report">📋 开题报告</span>
+                    <span class="paper-tag tag-lit">📖 文献整理</span>
+                    <span class="paper-tag tag-polish">✨ 全文润色</span>
+                    <span class="paper-tag tag-format">📐 格式校对</span>
+                    <span class="paper-tag tag-empirical">📊 财经实证专项</span>
+                </div>
+
+                <!-- 全学科基础功能 -->
+                <div class="paper-section">
+                    <h3 class="paper-section-title">🌐 全学科基础功能</h3>
+                    <div class="paper-func-list">
+                        <div class="paper-func-item active" data-func="topic" onclick="switchPaperFunc('topic')">
+                            <span class="func-icon">💡</span>
+                            <div class="func-info">
+                                <span class="func-name">智能选题生成</span>
+                                <span class="func-desc">输入方向自动生成可写选题</span>
+                            </div>
+                        </div>
+                        <div class="paper-func-item" data-func="proposal" onclick="switchPaperFunc('proposal')">
+                            <span class="func-icon">📋</span>
+                            <div class="func-info">
+                                <span class="func-name">开题报告撰写</span>
+                                <span class="func-desc">一键生成完整开题报告</span>
+                            </div>
+                        </div>
+                        <div class="paper-func-item" data-func="literature" onclick="switchPaperFunc('literature')">
+                            <span class="func-icon">📖</span>
+                            <div class="func-info">
+                                <span class="func-name">文献综述辅助</span>
+                                <span class="func-desc">总结提炼、梳理研究脉络</span>
+                            </div>
+                        </div>
+                        <div class="paper-func-item" data-func="polish" onclick="switchPaperFunc('polish')">
+                            <span class="func-icon">✨</span>
+                            <div class="func-info">
+                                <span class="func-name">全文润色改写</span>
+                                <span class="func-desc">去口语化、提升学术性</span>
+                            </div>
+                        </div>
+                        <div class="paper-func-item" data-func="reduce" onclick="switchPaperFunc('reduce')">
+                            <span class="func-icon">🔄</span>
+                            <div class="func-info">
+                                <span class="func-name">智能降重</span>
+                                <span class="func-desc">同义改写，降低重复率</span>
+                            </div>
+                        </div>
+                        <div class="paper-func-item" data-func="format" onclick="switchPaperFunc('format')">
+                            <span class="func-icon">📐</span>
+                            <div class="func-info">
+                                <span class="func-name">格式一键排版</span>
+                                <span class="func-desc">自动适配论文模板</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 财经专精功能 -->
+                <div class="paper-section">
+                    <h3 class="paper-section-title finance">💎 财经专精特色</h3>
+                    <div class="paper-func-list">
+                        <div class="paper-func-item" data-func="empirical" onclick="switchPaperFunc('empirical')">
+                            <span class="func-icon">📊</span>
+                            <div class="func-info">
+                                <span class="func-name">实证模型辅导</span>
+                                <span class="func-desc">OLS/固定效应/DID/PSM等</span>
+                            </div>
+                        </div>
+                        <div class="paper-func-item" data-func="data_guide" onclick="switchPaperFunc('data_guide')">
+                            <span class="func-icon">🗄️</span>
+                            <div class="func-info">
+                                <span class="func-name">数据查找指引</span>
+                                <span class="func-desc">CSMAR/Wind/统计局/年报</span>
+                            </div>
+                        </div>
+                        <div class="paper-func-item" data-func="code_help" onclick="switchPaperFunc('code_help')">
+                            <span class="func-icon">💻</span>
+                            <div class="func-info">
+                                <span class="func-name">Stata/Python实证代码</span>
+                                <span class="func-desc">代码辅助+回归结果解读</span>
+                            </div>
+                        </div>
+                        <div class="paper-func-item" data-func="finance_topic" onclick="switchPaperFunc('finance_topic')">
+                            <span class="func-icon">🏦</span>
+                            <div class="func-info">
+                                <span class="func-name">财经专项选题库</span>
+                                <span class="func-desc">金融/会计/财税/ESG专题</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧：主工作区 -->
+            <div class="paper-main">
+                <!-- 默认欢迎面板 -->
+                <div id="paperWelcome" class="paper-welcome">
+                    <div class="welcome-icon">📄</div>
+                    <h2>欢迎来到 AI论文工坊</h2>
+                    <p>请从左侧选择一个功能开始，或直接输入你的论文需求</p>
+                    <div class="welcome-quick-actions">
+                        <button class="welcome-btn" onclick="switchPaperFunc('topic')">💡 帮我选题</button>
+                        <button class="welcome-btn" onclick="switchPaperFunc('proposal')">📋 写开题报告</button>
+                        <button class="welcome-btn" onclick="switchPaperFunc('polish')">✨ 润色论文</button>
+                        <button class="welcome-btn" onclick="switchPaperFunc('finance_topic')">🏦 财经选题库</button>
+                    </div>
+                </div>
+
+                <!-- Coze 智能体对话面板 -->
+                <div id="paperAiPanel" class="paper-ai-panel" style="display:none;">
+                    <div class="paper-ai-header">
+                        <span class="paper-ai-icon">🤖</span>
+                        <span class="paper-ai-title">AI论文智能体</span>
+                        <span class="paper-ai-badge">Coze Bot</span>
+                        <button class="paper-ai-toggle" onclick="togglePaperAi()" title="折叠/展开">−</button>
+                    </div>
+                    <div class="paper-ai-body" id="paperAiBody">
+                        <div class="paper-ai-welcome" id="paperAiWelcome">
+                            <div class="paper-ai-welcome-icon">🤖</div>
+                            <p>我是你的论文智能助手，可以帮你：</p>
+                            <div class="paper-ai-features">
+                                <span>💡 论文选题建议</span>
+                                <span>📋 开题报告辅导</span>
+                                <span>📖 文献综述指导</span>
+                                <span>✨ 论文润色改写</span>
+                                <span>📊 实证方法解答</span>
+                                <span>📐 格式排版咨询</span>
+                            </div>
+                        </div>
+                        <div class="paper-ai-messages" id="paperAiMessages"></div>
+                        <div class="paper-ai-quick-actions" id="paperAiQuickActions">
+                            <button class="paper-ai-quick-btn" onclick="askPaperAi('请帮我推荐几个金融学方向的实证论文选题')">💡 推荐选题</button>
+                            <button class="paper-ai-quick-btn" onclick="askPaperAi('开题报告应该包含哪些部分？每个部分怎么写？')">📋 开题指导</button>
+                            <button class="paper-ai-quick-btn" onclick="askPaperAi('如何写一篇高质量的文献综述？')">📖 文献综述</button>
+                            <button class="paper-ai-quick-btn" onclick="askPaperAi('请帮我润色这段论文摘要，提升学术性')">✨ 润色示例</button>
+                        </div>
+                        <div class="paper-ai-input-row">
+                            <input type="text" class="paper-ai-input" id="paperAiInput"
+                                   placeholder="输入你的论文相关问题..."
+                                   onkeydown="if(event.key==='Enter')askPaperAi()">
+                            <button class="paper-ai-send-btn" onclick="askPaperAi()">发送</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 各功能面板容器 -->
+                <div id="paperFuncPanels" style="display:none;">
+                    <!-- 选题生成 -->
+                    <div class="paper-func-panel" id="panel_topic">
+                        <h3>💡 智能选题生成</h3>
+                        <p class="panel-desc">输入你的专业方向、感兴趣的研究领域和难度要求，AI为你生成大量可写、有数据、好落地的论文题目</p>
+                        <div class="panel-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>专业方向 <span class="required">*</span></label>
+                                    <input type="text" class="input" id="topic_major" placeholder="例如：金融学、会计学、计算机科学...">
+                                </div>
+                                <div class="form-group">
+                                    <label>研究领域</label>
+                                    <input type="text" class="input" id="topic_field" placeholder="例如：资本市场、人工智能、ESG...">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>论文类型</label>
+                                    <select class="input" id="topic_type">
+                                        <option value="">不限</option>
+                                        <option value="course">课程论文</option>
+                                        <option value="graduate">毕业论文</option>
+                                        <option value="research">科研习作</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>难度要求</label>
+                                    <select class="input" id="topic_level">
+                                        <option value="easy">入门级 - 数据易获取</option>
+                                        <option value="medium" selected>中级 - 有一定研究深度</option>
+                                        <option value="hard">高级 - 创新性强</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>补充说明</label>
+                                <textarea class="input textarea" id="topic_extra" rows="3" placeholder="可以补充你感兴趣的细分方向、偏好的研究方法、想要避开的雷区等..."></textarea>
+                            </div>
+                            <button class="btn btn-primary btn-lg" onclick="paperGenerate('topic')">🚀 生成选题</button>
+                        </div>
+                        <div id="topic_result" class="paper-result"></div>
+                    </div>
+
+                    <!-- 开题报告 -->
+                    <div class="paper-func-panel" id="panel_proposal" style="display:none;">
+                        <h3>📋 开题报告一键撰写</h3>
+                        <p class="panel-desc">自动生成包含研究背景、意义、国内外研究现状、研究内容、创新点、技术路线的完整开题报告</p>
+                        <div class="panel-form">
+                            <div class="form-group">
+                                <label>论文题目 <span class="required">*</span></label>
+                                <input type="text" class="input" id="proposal_title" placeholder="请输入你的论文题目...">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>专业方向</label>
+                                    <input type="text" class="input" id="proposal_major" placeholder="例如：金融学">
+                                </div>
+                                <div class="form-group">
+                                    <label>学位层次</label>
+                                    <select class="input" id="proposal_degree">
+                                        <option value="bachelor">本科</option>
+                                        <option value="master">硕士</option>
+                                        <option value="phd">博士</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>研究方向关键词</label>
+                                <input type="text" class="input" id="proposal_keywords" placeholder="例如：企业创新、数字化转型、融资约束...">
+                            </div>
+                            <button class="btn btn-primary btn-lg" onclick="paperGenerate('proposal')">📋 生成开题报告</button>
+                        </div>
+                        <div id="proposal_result" class="paper-result"></div>
+                    </div>
+
+                    <!-- 文献综述 -->
+                    <div class="paper-func-panel" id="panel_literature" style="display:none;">
+                        <h3>📖 文献综述辅助</h3>
+                        <p class="panel-desc">输入论文主题或粘贴文献摘要，AI帮你总结提炼、梳理研究脉络、撰写研究述评</p>
+                        <div class="panel-form">
+                            <div class="form-group">
+                                <label>研究主题 <span class="required">*</span></label>
+                                <input type="text" class="input" id="lit_topic" placeholder="请输入研究主题...">
+                            </div>
+                            <div class="form-group">
+                                <label>文献摘要（可选）</label>
+                                <textarea class="input textarea" id="lit_abstracts" rows="6" placeholder="可粘贴多条文献摘要，每行一条...&#10;例如：&#10;张三(2023)研究发现...&#10;李四(2024)指出..."></textarea>
+                            </div>
+                            <button class="btn btn-primary btn-lg" onclick="paperGenerate('literature')">📖 生成文献综述</button>
+                        </div>
+                        <div id="literature_result" class="paper-result"></div>
+                    </div>
+
+                    <!-- 全文润色 -->
+                    <div class="paper-func-panel" id="panel_polish" style="display:none;">
+                        <h3>✨ 全文润色改写</h3>
+                        <p class="panel-desc">去除口语化表达、提升学术性、优化逻辑结构、精炼语句</p>
+                        <div class="panel-form">
+                            <div class="form-group">
+                                <label>原文内容 <span class="required">*</span></label>
+                                <textarea class="input textarea" id="polish_text" rows="8" placeholder="请粘贴需要润色的论文段落..."></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>润色风格</label>
+                                    <select class="input" id="polish_style">
+                                        <option value="academic">学术严谨型</option>
+                                        <option value="concise">简洁精炼型</option>
+                                        <option value="professional">专业深度型</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-lg" onclick="paperGenerate('polish')">✨ 开始润色</button>
+                        </div>
+                        <div id="polish_result" class="paper-result"></div>
+                    </div>
+
+                    <!-- 智能降重 -->
+                    <div class="paper-func-panel" id="panel_reduce" style="display:none;">
+                        <h3>🔄 智能降重</h3>
+                        <p class="panel-desc">同义学术改写，保留核心逻辑和学术严谨性，有效降低重复率</p>
+                        <div class="panel-form">
+                            <div class="form-group">
+                                <label>原文内容 <span class="required">*</span></label>
+                                <textarea class="input textarea" id="reduce_text" rows="8" placeholder="请粘贴需要降重的论文段落..."></textarea>
+                            </div>
+                            <button class="btn btn-primary btn-lg" onclick="paperGenerate('reduce')">🔄 开始降重</button>
+                        </div>
+                        <div id="reduce_result" class="paper-result"></div>
+                    </div>
+
+                    <!-- 格式排版 -->
+                    <div class="paper-func-panel" id="panel_format" style="display:none;">
+                        <h3>📐 格式一键排版</h3>
+                        <p class="panel-desc">自动适配各校论文模板，生成目录、调整字体行距、规范引用格式、自动生成GB/T7714参考文献</p>
+                        <div class="panel-form">
+                            <div class="form-group">
+                                <label>论文内容 <span class="required">*</span></label>
+                                <textarea class="input textarea" id="format_text" rows="8" placeholder="请粘贴需要格式化的论文内容..."></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>引用格式</label>
+                                    <select class="input" id="format_style">
+                                        <option value="gbt7714">GB/T 7714（中国标准）</option>
+                                        <option value="apa">APA（美国心理学会）</option>
+                                        <option value="mla">MLA（现代语言协会）</option>
+                                        <option value="chicago">Chicago（芝加哥格式）</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-lg" onclick="paperGenerate('format')">📐 格式化排版</button>
+                        </div>
+                        <div id="format_result" class="paper-result"></div>
+                    </div>
+
+                    <!-- 实证模型辅导 -->
+                    <div class="paper-func-panel" id="panel_empirical" style="display:none;">
+                        <h3>📊 财经实证模型辅导</h3>
+                        <p class="panel-desc">覆盖OLS、固定效应、DID、PSM、中介效应、调节效应、门槛模型、面板回归等主流实证方法</p>
+                        <div class="panel-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>模型类型 <span class="required">*</span></label>
+                                    <select class="input" id="emp_model">
+                                        <option value="ols">OLS 普通最小二乘法</option>
+                                        <option value="fe">固定效应模型</option>
+                                        <option value="did">DID 双重差分</option>
+                                        <option value="psm">PSM 倾向得分匹配</option>
+                                        <option value="mediation">中介效应模型</option>
+                                        <option value="moderation">调节效应模型</option>
+                                        <option value="threshold">门槛回归模型</option>
+                                        <option value="panel">面板回归</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>研究问题描述</label>
+                                <textarea class="input textarea" id="emp_question" rows="4" placeholder="例如：研究数字化转型对企业绩效的影响，控制变量包括企业规模、资产负债率、成立年限等..."></textarea>
+                            </div>
+                            <button class="btn btn-primary btn-lg" onclick="paperGenerate('empirical')">📊 获取模型指导</button>
+                        </div>
+                        <div id="empirical_result" class="paper-result"></div>
+                    </div>
+
+                    <!-- 数据查找指引 -->
+                    <div class="paper-func-panel" id="panel_data_guide" style="display:none;">
+                        <h3>🗄️ 数据查找指引</h3>
+                        <p class="panel-desc">提供CSMAR、Wind、统计局、上市公司年报等主流财经数据源的查找和使用指导</p>
+                        <div class="panel-form">
+                            <div class="form-group">
+                                <label>需要的数据类型 <span class="required">*</span></label>
+                                <input type="text" class="input" id="data_type" placeholder="例如：上市公司财务数据、宏观经济指标、行业数据...">
+                            </div>
+                            <div class="form-group">
+                                <label>具体需求描述</label>
+                                <textarea class="input textarea" id="data_detail" rows="4" placeholder="例如：需要2015-2024年A股制造业上市公司的ROA、资产负债率、研发投入等数据..."></textarea>
+                            </div>
+                            <button class="btn btn-primary btn-lg" onclick="paperGenerate('data_guide')">🗄️ 获取数据指引</button>
+                        </div>
+                        <div id="data_guide_result" class="paper-result"></div>
+                    </div>
+
+                    <!-- Stata/Python代码 -->
+                    <div class="paper-func-panel" id="panel_code_help" style="display:none;">
+                        <h3>💻 Stata/Python 实证代码辅助</h3>
+                        <p class="panel-desc">提供Stata或Python的实证分析代码，并附回归结果解读</p>
+                        <div class="panel-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>编程语言</label>
+                                    <select class="input" id="code_lang">
+                                        <option value="stata">Stata</option>
+                                        <option value="python">Python</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>分析类型</label>
+                                    <select class="input" id="code_analysis">
+                                        <option value="descriptive">描述性统计</option>
+                                        <option value="regression">回归分析</option>
+                                        <option value="robustness">稳健性检验</option>
+                                        <option value="heterogeneity">异质性分析</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>变量说明</label>
+                                <textarea class="input textarea" id="code_vars" rows="4" placeholder="例如：被解释变量：ROA；解释变量：Digital（数字化转型程度）；控制变量：Size Lev Age..."></textarea>
+                            </div>
+                            <button class="btn btn-primary btn-lg" onclick="paperGenerate('code_help')">💻 生成代码</button>
+                        </div>
+                        <div id="code_help_result" class="paper-result"></div>
+                    </div>
+
+                    <!-- 财经专项选题库 -->
+                    <div class="paper-func-panel" id="panel_finance_topic" style="display:none;">
+                        <h3>🏦 财经专项选题库</h3>
+                        <p class="panel-desc">覆盖金融、会计、财税、ESG、资本市场、公司治理等财经经管领域专项选题</p>
+                        <div class="panel-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>财经领域 <span class="required">*</span></label>
+                                    <select class="input" id="fin_field">
+                                        <option value="finance">金融学</option>
+                                        <option value="accounting">会计学</option>
+                                        <option value="tax">财税</option>
+                                        <option value="esg">ESG与可持续发展</option>
+                                        <option value="capital">资本市场</option>
+                                        <option value="governance">公司治理</option>
+                                        <option value="trade">国际贸易</option>
+                                        <option value="econ">经济学</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>论文类型</label>
+                                    <select class="input" id="fin_type">
+                                        <option value="empirical">实证研究</option>
+                                        <option value="case">案例分析</option>
+                                        <option value="theoretical">理论分析</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>感兴趣的细分方向</label>
+                                <input type="text" class="input" id="fin_sub" placeholder="例如：绿色金融、数字化转型、审计质量...">
+                            </div>
+                            <button class="btn btn-primary btn-lg" onclick="paperGenerate('finance_topic')">🏦 获取选题推荐</button>
+                        </div>
+                        <div id="finance_topic_result" class="paper-result"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/paper.js"></script>
+</body>
+</html>

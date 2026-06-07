@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI全真模拟面试 - 知学助手</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/interview.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="logo-area" onclick="window.location.href='/index.html'">
+                <span class="logo-icon">🎓</span>
+                <span class="logo-text">知学助手</span>
+            </div>
+            <div class="topbar-right">
+                <button class="back-btn" onclick="window.location.href='/index.html'">← 返回首页</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="subpage-container">
+        <div class="subpage-header">
+            <h1>💼 AI 全真模拟面试</h1>
+            <p>求职面试 · 考证复试 · 简历压力面 · 群面模拟 · 中英双语 · 多维评分 · 🤖AI智能体驱动</p>
+        </div>
+
+        <!-- AI智能体配置面板 -->
+        <div class="card agent-config-card" id="agentConfigCard">
+            <div class="card-header">
+                <span class="card-icon">🤖</span>
+                <h3>AI 面试智能体配置</h3>
+                <span class="badge badge-new">v2.0</span>
+                <span style="font-size:12px;color:var(--text-light);margin-left:auto;">智能追问 · 多维评分 · 人格切换</span>
+            </div>
+            <div class="agent-config-body">
+                <div class="agent-info-row">
+                    <div class="agent-status-indicator" id="agentStatusIndicator">
+                        <span class="status-dot active"></span>
+                        <span>智能体已就绪</span>
+                    </div>
+                    <div class="agent-personality-selector">
+                        <label>🎭 面试官人格：</label>
+                        <select class="select" id="agentPersonality" onchange="switchAgentPersonality(this.value)">
+                            <option value="professional">👔 专业型 — 严谨、注重逻辑</option>
+                            <option value="friendly">😊 亲和型 — 友善、轻松氛围</option>
+                            <option value="strict">😤 严厉型 — 严格、犀利追问</option>
+                            <option value="challenging">🔥 挑战型 — 质疑反诘、压力测试</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="agent-feature-grid" style="grid-template-columns: 1fr;">
+                    <div class="agent-feature-item" onclick="openCoachChat()" title="点击打开AI面试教练" style="background: linear-gradient(135deg, #e0f2fe, #dbeafe);border: 2px solid #3b82f6;box-shadow: 0 4px 20px rgba(59,130,246,0.15);transform: scale(1.02);">
+                        <span class="af-icon" style="font-size:32px;">🤖</span>
+                        <span class="af-name" style="color:#1e40af;font-size:18px;font-weight:700;">AI 面试教练</span>
+                        <span class="af-desc" style="color:#3b82f6;font-weight:500;">Coze 真实智能体 · 像豆包一样自由对话 · 有任何面试问题直接问它</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 智能题库面板 -->
+        <div class="card agent-panel" id="questionBankPanel" style="display:none;">
+            <div class="card-header">
+                <span class="card-icon">🧠</span>
+                <h3>智能题库</h3>
+                <span class="badge badge-new">AI驱动</span>
+                <button class="linked-ai-toggle" onclick="document.getElementById('questionBankPanel').style.display='none'" style="color:var(--text-secondary);font-size:16px;margin-left:auto;">✕</button>
+            </div>
+            <div id="questionBankContent"></div>
+        </div>
+
+        <!-- AI面试教练对话面板（Coze iframe 嵌入） -->
+        <div class="card agent-panel" id="coachChatPanel" style="display:none;">
+            <div class="card-header linked-ai-header">
+                <span class="card-icon">🎯</span>
+                <h3>AI 面试教练</h3>
+                <span class="badge badge-ai">Coze Bot</span>
+                <button class="linked-ai-toggle" onclick="document.getElementById('coachChatPanel').style.display='none'" style="color:#fff;font-size:16px;margin-left:auto;">✕</button>
+            </div>
+            <div style="padding:10px 16px;background:linear-gradient(90deg,#f0f9ff,#e0f2fe);border-bottom:1px solid #bae6fd;font-size:13px;color:#0369a1;display:flex;align-items:center;gap:8px;">
+                <span>💡</span>
+                <span><strong>真正的 Coze AI 智能体</strong> — 可以像豆包一样自由对话，有任何面试问题直接问它！</span>
+            </div>
+            <div style="width:100%;height:560px;border:none;overflow:hidden;">
+                <iframe 
+                    id="coachChatIframe"
+                    src="https://wqtnjcghf2.coze.site"
+                    style="width:100%;height:100%;border:none;display:block;"
+                    allow="microphone;camera;clipboard-read;clipboard-write"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+                    title="AI面试教练">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- 六大场景选择 -->
+        <div class="interview-scenes">
+            <div class="scene-card active" data-scene="job" onclick="switchScene('job', this)">
+                <div class="scene-icon">💼</div>
+                <h4>财经岗求职面试</h4>
+                <p>证券/基金/银行/投行</p>
+            </div>
+            <div class="scene-card" data-scene="techjob" onclick="switchScene('techjob', this)">
+                <div class="scene-icon">🔬</div>
+                <h4>理工岗求职面试</h4>
+                <p>研发/技术/工程/IT</p>
+            </div>
+            <div class="scene-card" data-scene="exam" onclick="switchScene('exam', this)">
+                <div class="scene-icon">📜</div>
+                <h4>考证&升学复试</h4>
+                <p>专业课口述+热点论述</p>
+            </div>
+            <div class="scene-card" data-scene="linked" onclick="switchScene('linked', this)">
+                <div class="scene-icon">🔗</div>
+                <h4>配套联动功能</h4>
+                <p>素材沉淀+冲刺规划+双语</p>
+            </div>
+            <div class="scene-card" data-scene="extend" onclick="switchScene('extend', this)">
+                <div class="scene-icon">🎤</div>
+                <h4>拓展面试场景</h4>
+                <p>答辩模拟+群面演练</p>
+            </div>
+            <div class="scene-card" data-scene="techdefense" onclick="switchScene('techdefense', this)">
+                <div class="scene-icon">🧪</div>
+                <h4>理工答辩&学术面试</h4>
+                <p>毕设答辩+科研面+竞赛</p>
+            </div>
+        </div>
+
+        <div class="subpage-body">
+            <!-- ====== 场景一：财经岗求职面试 ====== -->
+            <div class="scene-panel active" id="panel-job">
+                <!-- 岗位配置 -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">⚙️</span>
+                        <h3>面试配置</h3>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>🎯 目标岗位方向</label>
+                            <select class="select" id="jobDirection">
+                                <option value="securities">证券/投行</option>
+                                <option value="fund">基金/资管</option>
+                                <option value="accounting">财会/审计</option>
+                                <option value="banking">银行/金融</option>
+                                <option value="general">综合金融</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>📜 持证情况</label>
+                            <select class="select" id="jobCert" multiple style="height:80px">
+                                <option value="none">无</option>
+                                <option value="chujikuaiji">初级会计</option>
+                                <option value="zhengquan">证券从业</option>
+                                <option value="jijin">基金从业</option>
+                                <option value="cpa">CPA（部分/全科）</option>
+                                <option value="cfa">CFA（部分/全科）</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>📋 粘贴招聘JD（可选）</label>
+                            <textarea class="textarea" id="jobJD" placeholder="粘贴目标岗位的招聘JD，AI将据此定制面试题..." style="min-height:80px"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>📄 上传简历（可选，用于压力面试）</label>
+                        <div class="upload-resume-area" id="resumeUploadArea">
+                            <span>📎 点击上传简历（txt/md）</span>
+                            <input type="file" id="resumeFileInput" accept=".txt,.md" style="display:none">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 面试类型选择 -->
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🎙️</span>
+                        <h3>选择面试类型</h3>
+                    </div>
+                    <div class="interview-types">
+                        <button class="itype-card" onclick="startInterview('professional', this)">
+                            <span class="itype-icon">📊</span>
+                            <span class="itype-name">专业面试</span>
+                            <span class="itype-desc">专业知识+实操考核</span>
+                        </button>
+                        <button class="itype-card" onclick="startInterview('hr', this)">
+                            <span class="itype-icon">👥</span>
+                            <span class="itype-name">HR综合面试</span>
+                            <span class="itype-desc">综合素质+职业规划</span>
+                        </button>
+                        <button class="itype-card" onclick="startInterview('behavior', this)">
+                            <span class="itype-icon">🧠</span>
+                            <span class="itype-name">行为面试</span>
+                            <span class="itype-desc">情景模拟+STAR法则</span>
+                        </button>
+                        <button class="itype-card" onclick="startInterview('pressure', this)">
+                            <span class="itype-icon">⚡</span>
+                            <span class="itype-name">简历压力面试</span>
+                            <span class="itype-desc">深挖履历+压力提问</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 面试对话区 -->
+                <div class="card interview-chat-card" id="interviewChatCard" style="display:none;">
+                    <div class="card-header">
+                        <span class="card-icon">🎙️</span>
+                        <h3 id="interviewTitle">面试进行中</h3>
+                        <span class="question-counter" id="questionCounter">第 1/5 题</span>
+                    </div>
+                    <div class="chat-area" style="height:400px">
+                        <div class="chat-messages" id="interviewMessages">
+                            <div class="msg bot">
+                                <div class="msg-avatar">🤖</div>
+                                <div class="msg-content">
+                                    <strong>面试官：</strong>你好，欢迎参加本次模拟面试。准备好了吗？请先做一下自我介绍。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-input-area">
+                            <textarea id="interviewInput" placeholder="输入你的回答..." rows="1"></textarea>
+                            <button class="btn btn-primary" onclick="sendInterviewAnswer()">回答</button>
+                            <button class="btn btn-accent" id="btnVoice" onclick="toggleVoice()" title="语音模式">🎤</button>
+                        </div>
+                    </div>
+                    <div class="interview-actions">
+                        <button class="btn btn-outline btn-sm" onclick="skipQuestion()">跳过此题</button>
+                        <button class="btn btn-outline btn-sm" onclick="getHint()">💡 获取提示</button>
+                        <button class="btn btn-success btn-sm" onclick="endInterview()">结束面试·查看评分</button>
+                    </div>
+                </div>
+
+                <!-- 评分报告 -->
+                <div class="card score-card" id="scoreCard" style="display:none;">
+                    <div class="card-header">
+                        <span class="card-icon">📊</span>
+                        <h3>多维评分报告</h3>
+                    </div>
+                    <div id="scoreContent"></div>
+                </div>
+            </div>
+
+            <!-- ====== 场景二：理工岗求职面试 ====== -->
+            <div class="scene-panel" id="panel-techjob">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">⚙️</span>
+                        <h3>面试配置</h3>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>🎯 目标岗位方向</label>
+                            <select class="select" id="techJobDirection">
+                                <option value="software">软件开发/后端</option>
+                                <option value="frontend">前端开发</option>
+                                <option value="algorithm">算法/机器学习</option>
+                                <option value="data">数据分析</option>
+                                <option value="embedded">嵌入式/硬件</option>
+                                <option value="mechanical">机械工程</option>
+                                <option value="electrical">电气/电子工程</option>
+                                <option value="civil">土木/建筑</option>
+                                <option value="chemical">化工/材料</option>
+                                <option value="general">综合技术岗</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>📜 技术栈/持证情况</label>
+                            <select class="select" id="techJobCert" multiple style="height:80px">
+                                <option value="none">无</option>
+                                <option value="python">Python</option>
+                                <option value="java">Java</option>
+                                <option value="cpp">C/C++</option>
+                                <option value="js">JavaScript/TS</option>
+                                <option value="cad">CAD/制图</option>
+                                <option value="ncee">计算机等级考试</option>
+                                <option value="cisco">CCNA/CCNP</option>
+                                <option value="pmp">PMP</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>📋 粘贴招聘JD（可选）</label>
+                            <textarea class="textarea" id="techJobJD" placeholder="粘贴目标岗位的招聘JD，AI将据此定制面试题..." style="min-height:80px"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>📄 上传简历（可选，用于压力面试）</label>
+                        <div class="upload-resume-area" id="techResumeUploadArea">
+                            <span>📎 点击上传简历（txt/md）</span>
+                            <input type="file" id="techResumeFileInput" accept=".txt,.md" style="display:none">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🎙️</span>
+                        <h3>选择面试类型</h3>
+                    </div>
+                    <div class="interview-types">
+                        <button class="itype-card" onclick="startTechInterview('professional', this)">
+                            <span class="itype-icon">📊</span>
+                            <span class="itype-name">专业技术面试</span>
+                            <span class="itype-desc">算法+系统设计+项目</span>
+                        </button>
+                        <button class="itype-card" onclick="startTechInterview('hr', this)">
+                            <span class="itype-icon">👥</span>
+                            <span class="itype-name">HR综合面试</span>
+                            <span class="itype-desc">综合素质+职业规划</span>
+                        </button>
+                        <button class="itype-card" onclick="startTechInterview('behavior', this)">
+                            <span class="itype-icon">🧠</span>
+                            <span class="itype-name">行为面试</span>
+                            <span class="itype-desc">情景模拟+STAR法则</span>
+                        </button>
+                        <button class="itype-card" onclick="startTechInterview('project', this)">
+                            <span class="itype-icon">💻</span>
+                            <span class="itype-name">项目/技术深挖</span>
+                            <span class="itype-desc">项目经历+技术难点</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card interview-chat-card" id="techInterviewChatCard" style="display:none;">
+                    <div class="card-header">
+                        <span class="card-icon">🎙️</span>
+                        <h3 id="techInterviewTitle">面试进行中</h3>
+                        <span class="question-counter" id="techQuestionCounter">第 1/5 题</span>
+                    </div>
+                    <div class="chat-area" style="height:400px">
+                        <div class="chat-messages" id="techInterviewMessages">
+                            <div class="msg bot">
+                                <div class="msg-avatar">🤖</div>
+                                <div class="msg-content">
+                                    <strong>面试官：</strong>你好，欢迎参加本次技术模拟面试。请先简单介绍一下你自己和你的技术背景。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-input-area">
+                            <textarea id="techInterviewInput" placeholder="输入你的回答..." rows="1"></textarea>
+                            <button class="btn btn-primary" onclick="sendTechInterviewAnswer()">回答</button>
+                        </div>
+                    </div>
+                    <div class="interview-actions">
+                        <button class="btn btn-outline btn-sm" onclick="skipTechQuestion()">跳过此题</button>
+                        <button class="btn btn-outline btn-sm" onclick="getTechHint()">💡 获取提示</button>
+                        <button class="btn btn-success btn-sm" onclick="endTechInterview()">结束面试·查看评分</button>
+                    </div>
+                </div>
+
+                <div class="card score-card" id="techScoreCard" style="display:none;">
+                    <div class="card-header">
+                        <span class="card-icon">📊</span>
+                        <h3>多维评分报告</h3>
+                    </div>
+                    <div id="techScoreContent"></div>
+                </div>
+            </div>
+
+            <!-- ====== 场景三：考证&升学复试 ====== -->
+            <div class="scene-panel" id="panel-exam">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📜</span>
+                        <h3>考证 & 升学复试面试 — 选择学科类别</h3>
+                    </div>
+                    <div class="form-row" style="margin-bottom:16px">
+                        <div class="form-group">
+                            <label>📚 学科类别</label>
+                            <select class="select" id="examSubjectCategory" onchange="switchExamCategory()">
+                                <option value="finance">📊 财经类</option>
+                                <option value="stem">🔬 理工类</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- 财经类复试按钮 -->
+                    <div id="examFinanceBtns">
+                        <p style="color:var(--text-secondary);margin-bottom:12px">专业课口述考核 + 热点即兴论述，锻炼口头表达能力</p>
+                        <div class="exam-interview-types">
+                            <button class="btn btn-outline" onclick="startExamOral('definition')">📖 名词解释口述</button>
+                            <button class="btn btn-outline" onclick="startExamOral('shortanswer')">📝 简答论述</button>
+                            <button class="btn btn-outline" onclick="startExamOral('case')">📊 财经案例分析</button>
+                            <button class="btn btn-accent" onclick="startHotTopic()">🔥 热点即兴论述</button>
+                        </div>
+                    </div>
+                    <!-- 理工类复试按钮 -->
+                    <div id="examStemBtns" style="display:none;">
+                        <p style="color:var(--text-secondary);margin-bottom:12px">理工科专业课口述考核 + 公式推导 + 实验/项目论述</p>
+                        <div class="exam-interview-types">
+                            <button class="btn btn-outline" onclick="startExamOral('stem_definition')">📖 概念/定理口述</button>
+                            <button class="btn btn-outline" onclick="startExamOral('stem_derive')">🧮 公式/推导论述</button>
+                            <button class="btn btn-outline" onclick="startExamOral('stem_experiment')">🔬 实验/项目论述</button>
+                            <button class="btn btn-accent" onclick="startStemHotTopic()">💡 学科前沿论述</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="examChatCard" style="display:none;">
+                    <div class="card-header">
+                        <span class="card-icon">🎤</span>
+                        <h3 id="examInterviewTitle">口述考核</h3>
+                    </div>
+                    <div class="chat-area" style="height:350px">
+                        <div class="chat-messages" id="examMessages"></div>
+                        <div class="chat-input-area">
+                            <textarea id="examInput" placeholder="输入你的口头回答..." rows="1"></textarea>
+                            <button class="btn btn-primary" onclick="sendExamAnswer()">回答</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====== 场景三：配套联动功能 ====== -->
+            <div class="scene-panel" id="panel-linked">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🔗</span>
+                        <h3>配套联动功能</h3>
+                        <span class="badge badge-new">AI智能体</span>
+                    </div>
+                    <div class="linked-features">
+                        <div class="linked-card" onclick="openLinkedAgent('material')">
+                            <h4>📦 面试素材自动沉淀</h4>
+                            <p>智能分析岗位需求，自动生成面试可用素材包</p>
+                        </div>
+                        <div class="linked-card" onclick="openLinkedAgent('plan')">
+                            <h4>📅 面试冲刺备考规划</h4>
+                            <p>根据面试剩余天数定制阶段计划，知识点→模拟→补强</p>
+                        </div>
+                        <div class="linked-card" onclick="openLinkedAgent('bilingual')">
+                            <h4>🌐 中英双语面试演练</h4>
+                            <p>全英文专业问答、英文自我介绍优化，适配外企和科研岗位</p>
+                        </div>
+                        <div class="linked-card" onclick="openLinkedAgent('techbilingual')">
+                            <h4>💻 技术英语面试</h4>
+                            <p>英文技术术语、算法白板题英文讲解、科研论文英文摘要</p>
+                        </div>
+                    </div>
+                    <div id="linkedResult" style="margin-top:20px"></div>
+                </div>
+
+                <!-- 素材沉淀智能体面板 -->
+                <div class="card agent-panel" id="materialAgentPanel" style="display:none;">
+                    <div class="card-header">
+                        <span class="card-icon">📦</span>
+                        <h3>面试素材沉淀智能体</h3>
+                        <button class="linked-ai-toggle" onclick="document.getElementById('materialAgentPanel').style.display='none'" style="margin-left:auto;font-size:16px;">✕</button>
+                    </div>
+                    <div class="form-row" style="margin-bottom:12px">
+                        <div class="form-group">
+                            <label>🎯 目标岗位</label>
+                            <input type="text" class="input" id="matPosition" placeholder="如：数据分析师">
+                        </div>
+                        <div class="form-group">
+                            <label>🏢 目标行业</label>
+                            <input type="text" class="input" id="matIndustry" placeholder="如：金融/互联网/制造业">
+                        </div>
+                        <div class="form-group">
+                            <label>💡 核心技能</label>
+                            <input type="text" class="input" id="matSkills" placeholder="如：Python、SQL、机器学习">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="generateInterviewMaterials()">🤖 生成面试素材包</button>
+                    <div id="materialAgentResult" style="margin-top:16px;"></div>
+                </div>
+
+                <!-- 冲刺规划智能体面板 -->
+                <div class="card agent-panel" id="planAgentPanel" style="display:none;">
+                    <div class="card-header">
+                        <span class="card-icon">📅</span>
+                        <h3>面试冲刺规划智能体</h3>
+                        <button class="linked-ai-toggle" onclick="document.getElementById('planAgentPanel').style.display='none'" style="margin-left:auto;font-size:16px;">✕</button>
+                    </div>
+                    <div class="form-row" style="margin-bottom:12px">
+                        <div class="form-group">
+                            <label>🎯 目标岗位</label>
+                            <input type="text" class="input" id="planPosition" placeholder="如：后端开发工程师">
+                        </div>
+                        <div class="form-group">
+                            <label>📅 剩余天数</label>
+                            <select class="select" id="planDays">
+                                <option value="3">3天（紧急冲刺）</option>
+                                <option value="7" selected>7天（标准备考）</option>
+                                <option value="14">14天（系统准备）</option>
+                                <option value="30">30天（充分准备）</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="generateInterviewPlan()">🤖 生成冲刺规划</button>
+                    <div id="planAgentResult" style="margin-top:16px;"></div>
+                </div>
+
+                <!-- 双语面试智能体面板 -->
+                <div class="card agent-panel" id="bilingualAgentPanel" style="display:none;">
+                    <div class="card-header">
+                        <span class="card-icon">🌐</span>
+                        <h3>中英双语面试智能体</h3>
+                        <button class="linked-ai-toggle" onclick="document.getElementById('bilingualAgentPanel').style.display='none'" style="margin-left:auto;font-size:16px;">✕</button>
+                    </div>
+                    <div class="exam-interview-types" style="margin-bottom:12px">
+                        <button class="btn btn-outline" onclick="bilingualGenerate('self_intro')">📝 英文自我介绍模板</button>
+                        <button class="btn btn-outline" onclick="bilingualGenerate('common_qa')">💬 常见英文问答</button>
+                        <button class="btn btn-outline" onclick="bilingualGenerate('professional')">🏢 专业英语词汇</button>
+                        <button class="btn btn-accent" onclick="bilingualGenerate('mock')">🎙️ 英文模拟面试</button>
+                        <button class="btn btn-outline" onclick="bilingualGenerate('writing')">✍️ 自我介绍优化</button>
+                    </div>
+                    <div id="bilingualAgentResult" style="margin-top:12px;"></div>
+                </div>
+
+                <!-- 技术英语面试智能体面板 -->
+                <div class="card agent-panel" id="techBilingualAgentPanel" style="display:none;">
+                    <div class="card-header">
+                        <span class="card-icon">💻</span>
+                        <h3>技术英语面试智能体</h3>
+                        <button class="linked-ai-toggle" onclick="document.getElementById('techBilingualAgentPanel').style.display='none'" style="margin-left:auto;font-size:16px;">✕</button>
+                    </div>
+                    <div class="exam-interview-types" style="margin-bottom:12px">
+                        <button class="btn btn-outline" onclick="techBilingualGenerate('terminology')">📖 技术术语大全</button>
+                        <button class="btn btn-outline" onclick="techBilingualGenerate('algorithm')">🧮 英文讲算法</button>
+                        <button class="btn btn-outline" onclick="techBilingualGenerate('system_design')">🏗️ 系统设计英文</button>
+                        <button class="btn btn-outline" onclick="techBilingualGenerate('project')">💻 英文讲项目</button>
+                        <button class="btn btn-accent" onclick="techBilingualGenerate('scientific')">📄 科研英文摘要</button>
+                    </div>
+                    <div id="techBilingualAgentResult" style="margin-top:12px;"></div>
+                </div>
+
+                <!-- Coze 面试智能体面板（iframe嵌入） -->
+                <div class="card" style="margin-top:20px;">
+                    <div class="card-header linked-ai-header">
+                        <span class="card-icon">🤖</span>
+                        <h3>AI 面试智能体</h3>
+                        <span class="badge badge-ai">Coze Bot</span>
+                    </div>
+                    <div style="width:100%;height:600px;border:none;overflow:hidden;">
+                        <iframe 
+                            src="https://wqtnjcghf2.coze.site"
+                            style="width:100%;height:100%;border:none;display:block;"
+                            allow="microphone;camera;clipboard-read;clipboard-write"
+                            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+                            title="AI面试智能体">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ====== 场景四：拓展面试场景 ====== -->
+            <div class="scene-panel" id="panel-extend">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🎤</span>
+                        <h3>拓展面试场景</h3>
+                    </div>
+                    <div class="extend-features">
+                        <div class="extend-card" onclick="startDefense()">
+                            <div class="extend-icon">🎓</div>
+                            <h4>职称 & 毕设答辩模拟</h4>
+                            <p>复刻评审答辩场景，AI扮演评审老师随机提问、点评答辩内容</p>
+                            <button class="btn btn-outline btn-sm">进入模拟</button>
+                        </div>
+                        <div class="extend-card" onclick="startGroupInterview()">
+                            <div class="extend-icon">👥</div>
+                            <h4>无领导小组群面模拟</h4>
+                            <p>AI灵活切换面试官/同组考生角色，围绕财经商业或理工技术议题开展群面演练</p>
+                            <button class="btn btn-outline btn-sm">进入模拟</button>
+                        </div>
+                        <div class="extend-card" onclick="startTechCompetition()">
+                            <div class="extend-icon">🏆</div>
+                            <h4>学科竞赛答辩模拟</h4>
+                            <p>数学建模/程序设计/电子设计等竞赛答辩，AI扮演评委提问</p>
+                            <button class="btn btn-outline btn-sm">进入模拟</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="extendChatCard" style="display:none;">
+                    <div class="card-header">
+                        <span class="card-icon">🎙️</span>
+                        <h3 id="extendTitle">拓展面试</h3>
+                    </div>
+                    <div class="chat-area" style="height:350px">
+                        <div class="chat-messages" id="extendMessages"></div>
+                        <div class="chat-input-area">
+                            <textarea id="extendInput" placeholder="输入你的回答..." rows="1"></textarea>
+                            <button class="btn btn-primary" onclick="sendExtendAnswer()">回答</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+            <!-- ====== 场景六：理工答辩&学术面试 ====== -->
+            <div class="scene-panel" id="panel-techdefense">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🧪</span>
+                        <h3>理工科答辩 & 学术面试</h3>
+                    </div>
+                    <p style="color:var(--text-secondary);margin-bottom:16px">毕设答辩、科研项目面试、学术面试全真模拟</p>
+                    <div class="form-row" style="margin-bottom:16px">
+                        <div class="form-group">
+                            <label>🔬 学科方向</label>
+                            <select class="select" id="techDefenseSubject">
+                                <option value="math">数学/应用数学</option>
+                                <option value="physics">物理/应用物理</option>
+                                <option value="chemistry">化学/化工</option>
+                                <option value="cs">计算机科学与技术</option>
+                                <option value="ee">电子/电气工程</option>
+                                <option value="mechanical">机械/自动化</option>
+                                <option value="civil">土木/建筑</option>
+                                <option value="biology">生物/生医工程</option>
+                                <option value="ai">人工智能/数据科学</option>
+                                <option value="general">通用理工科</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="exam-interview-types">
+                        <button class="btn btn-outline" onclick="startTechDefense('proposal')">📋 开题报告答辩</button>
+                        <button class="btn btn-outline" onclick="startTechDefense('final')">🎓 毕业设计答辩</button>
+                        <button class="btn btn-outline" onclick="startTechDefense('paper')">📄 论文/期刊审稿面</button>
+                        <button class="btn btn-accent" onclick="startTechDefense('research')">🔍 科研项目面试</button>
+                    </div>
+                </div>
+                <div class="card" id="techDefenseChatCard" style="display:none;">
+                    <div class="card-header">
+                        <span class="card-icon">🎙️</span>
+                        <h3 id="techDefenseTitle">答辩进行中</h3>
+                    </div>
+                    <div class="chat-area" style="height:350px">
+                        <div class="chat-messages" id="techDefenseMessages"></div>
+                        <div class="chat-input-area">
+                            <textarea id="techDefenseInput" placeholder="输入你的回答..." rows="1"></textarea>
+                            <button class="btn btn-primary" onclick="sendTechDefenseAnswer()">回答</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/interview-agent.js"></script>
+    <script src="/js/interview-agents.js"></script>
+    <script src="/js/interview.js"></script>
+</body>
+</html>

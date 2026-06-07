@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>个性化学习规划 - 知学助手</title>
+    <link rel="stylesheet" href="/css/global.css?v=2">
+    <link rel="stylesheet" href="/css/plan.css?v=3">
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="logo-area" onclick="window.location.href='/index.html'">
+                <span class="logo-icon">🎓</span>
+                <span class="logo-text">知学助手</span>
+            </div>
+            <div class="topbar-right">
+                <button class="back-btn" onclick="window.location.href='/index.html'">← 返回首页</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="subpage-container">
+        <div class="subpage-header">
+            <h1>🎯 个性化学习规划</h1>
+            <p>AI智能体驱动 · 思维导图知识体系构建 + 个性化学习规划辅导</p>
+        </div>
+
+        <div class="subpage-body">
+            <!-- ===== 智能体1: 思维导图知识体系构建 ===== -->
+            <div class="card agent-card" id="mindmapAgentCard">
+                <div class="card-header agent-header">
+                    <span class="card-icon">🧠</span>
+                    <h3>思维导图知识体系构建</h3>
+                    <span class="badge badge-ai">AI 智能体</span>
+                </div>
+                <p style="color:var(--text-secondary);font-size:14px;margin-bottom:16px;">
+                    选择学科，AI自动生成3层知识体系思维导图，支持节点展开、公式展示、例题解析和常见误区标注
+                </p>
+
+                <!-- 学科选择 -->
+                <div class="form-row" style="margin-bottom:16px;">
+                    <div class="form-group">
+                        <label>📖 选择学科</label>
+                        <select class="select" id="planSubject" onchange="onSubjectChange()">
+                            <optgroup label="📊 财经类">
+                                <option value="accounting">会计基础</option>
+                                <option value="finance_basic">财经基础</option>
+                                <option value="securities">证券投资</option>
+                                <option value="fund">基金从业</option>
+                                <option value="banking">银行业务</option>
+                                <option value="tax">税务基础</option>
+                                <option value="economics">经济学</option>
+                            </optgroup>
+                            <optgroup label="🔬 理工类">
+                                <option value="math_advanced">高等数学</option>
+                                <option value="linear_algebra">线性代数</option>
+                                <option value="probability">概率论与数理统计</option>
+                                <option value="physics">大学物理</option>
+                                <option value="chemistry">大学化学</option>
+                                <option value="cs_basics">计算机基础</option>
+                                <option value="data_structure">数据结构与算法</option>
+                                <option value="operating_system">操作系统</option>
+                                <option value="network">计算机网络</option>
+                                <option value="database">数据库原理</option>
+                                <option value="software_eng">软件工程</option>
+                                <option value="circuit">电路原理</option>
+                                <option value="signal">信号与系统</option>
+                                <option value="mechanics">理论力学</option>
+                                <option value="material_mech">材料力学</option>
+                                <option value="cad">机械制图/CAD</option>
+                                <option value="thermodynamics">工程热力学</option>
+                                <option value="automation">自动控制原理</option>
+                                <option value="civil_eng">土木工程基础</option>
+                                <option value="electronics">电子工程基础</option>
+                                <option value="biology">普通生物学</option>
+                                <option value="genetics">遗传学</option>
+                                <option value="biochem">生物化学</option>
+                                <option value="stats_advanced">统计学</option>
+                                <option value="ai_basics">人工智能导论</option>
+                                <option value="machine_learning">机器学习</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="form-group" style="display:flex;align-items:flex-end;">
+                        <button class="btn btn-primary" onclick="generateMindmapOnly()">🧠 生成思维导图</button>
+                    </div>
+                </div>
+
+                <!-- 思维导图 + AI助手并排布局 -->
+                <div class="mindmap-layout" id="mindmapLayout" style="display:none;">
+                    <div class="mindmap-main-panel">
+                        <div class="mindmap-container" id="mindmapContainer"></div>
+                    </div>
+                    <div class="mindmap-ai-panel" id="mindmapAiPanel">
+                        <div class="mindmap-ai-header">
+                            <span class="mindmap-ai-icon">🤖</span>
+                            <span class="mindmap-ai-title">AI 知识助手</span>
+                            <span class="mindmap-ai-badge">Coze Bot</span>
+                            <button class="mindmap-ai-toggle" onclick="toggleMindmapAi()" title="折叠/展开">−</button>
+                        </div>
+                        <div class="mindmap-ai-body" id="mindmapAiBody">
+                            <div class="mindmap-ai-welcome">
+                                <div class="mindmap-ai-welcome-icon">🤖</div>
+                                <p>我是你的专属知识助手，基于思维导图知识点为你提供：</p>
+                                <div class="mindmap-ai-features">
+                                    <span>🔍 深度解析知识点</span>
+                                    <span>📝 生成更多例题</span>
+                                    <span>💡 学习方法建议</span>
+                                    <span>❓ 随时提问答疑</span>
+                                </div>
+                            </div>
+                            <div class="mindmap-ai-messages" id="mindmapAiMessages"></div>
+                            <div class="mindmap-ai-quick-actions" id="mindmapAiQuickActions">
+                                <button class="mindmap-ai-quick-btn" onclick="askMindmapAi('请帮我详细解释当前思维导图中的核心概念')">📖 解释核心概念</button>
+                                <button class="mindmap-ai-quick-btn" onclick="askMindmapAi('请给我出3道与当前知识点相关的练习题')">📝 生成练习题</button>
+                                <button class="mindmap-ai-quick-btn" onclick="askMindmapAi('请总结当前知识点的学习重点和记忆方法')">💡 学习建议</button>
+                                <button class="mindmap-ai-quick-btn" onclick="askMindmapAi('请帮我梳理当前知识点的易错点和常见误区')">⚠️ 易错点分析</button>
+                            </div>
+                            <div class="mindmap-ai-input-row">
+                                <input type="text" class="mindmap-ai-input" id="mindmapAiInput" placeholder="输入你的问题，AI知识助手为你解答..." onkeydown="if(event.key==='Enter')askMindmapAi()">
+                                <button class="mindmap-ai-send-btn" onclick="askMindmapAi()">发送</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 智能体2: 个性化学习规划辅导（对话式） ===== -->
+            <div class="card agent-card" id="plannerAgentCard">
+                <div class="card-header agent-header">
+                    <span class="card-icon">🎓</span>
+                    <h3>个性化学习规划辅导</h3>
+                    <span class="badge badge-ai">AI 智能体</span>
+                </div>
+                <p style="color:var(--text-secondary);font-size:14px;margin-bottom:16px;">
+                    直接和AI对话，告诉它你的学习需求，它会为你量身定制专属学习规划方案
+                </p>
+
+                <!-- 对话式聊天界面 -->
+                <div class="planner-chat-container" id="plannerChatContainer">
+                    <!-- 欢迎消息 -->
+                    <div class="planner-welcome" id="plannerWelcome">
+                        <div class="planner-welcome-icon">🎓</div>
+                        <h3>你好！我是你的专属学习规划助手</h3>
+                        <p>我可以帮你制定个性化的学习规划方案。请告诉我：</p>
+                        <div class="planner-suggestions">
+                            <button class="planner-suggestion-btn" onclick="sendPlannerMessage('我是大二学生，想备考高等数学期末考试，还有30天，每天能学2小时，请帮我制定学习计划')">
+                                📖 大二备考高数期末，30天，每天2小时
+                            </button>
+                            <button class="planner-suggestion-btn" onclick="sendPlannerMessage('我是大三学生，准备考研计算机，还有3个月，每天能学4小时，请帮我制定复习规划')">
+                                🎯 大三考研计算机，3个月，每天4小时
+                            </button>
+                            <button class="planner-suggestion-btn" onclick="sendPlannerMessage('我想系统学习数据结构与算法，基础一般，希望2个月内掌握核心内容，每天1.5小时')">
+                                💻 零基础学数据结构，2个月，每天1.5小时
+                            </button>
+                            <button class="planner-suggestion-btn" onclick="sendPlannerMessage('我是会计专业大一学生，想备考初级会计职称，还有2个月，每天能学3小时')">
+                                📊 大一备考初级会计，2个月，每天3小时
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 消息区域 -->
+                    <div class="planner-messages" id="plannerMessages"></div>
+
+                    <!-- 输入区域 -->
+                    <div class="planner-input-area">
+                        <div class="planner-input-row">
+                            <textarea class="planner-input" id="plannerInput" placeholder="描述你的学习需求，例如：我是大二学生，想备考高等数学期末考试，还有30天，每天能学2小时..." onkeydown="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();sendPlannerMessage();}"></textarea>
+                            <button class="planner-send-btn" id="plannerSendBtn" onclick="sendPlannerMessage()">
+                                <span>发送</span>
+                            </button>
+                        </div>
+                        <div class="planner-input-hint">按 Enter 发送，Shift+Enter 换行</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/js/plan.js"></script>
+</body>
+</html>
